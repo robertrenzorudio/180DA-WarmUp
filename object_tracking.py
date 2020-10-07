@@ -69,15 +69,15 @@ def main():
 
     # Parse arguments.
     c_space = str.upper(args.c)
-    if c_space == "RGB" and c_space == "HSV":
+    if c_space == "RGB" or c_space == "HSV":
+        lower = args.l.split(',')
+        lower = np.array([int(i) for i in lower], np.uint8)
+        upper = args.u.split(',')
+        upper = np.array([int(i) for i in upper], np.uint8)
+        track(c_space, lower, upper)
+    else:
+        print("unrecognized -c option")
         sys.exit(1)
-
-    lower = args.l.split(',')
-    lower = np.array([int(i) for i in lower], np.uint8)
-    upper = args.u.split(',')
-    upper = np.array([int(i) for i in upper], np.uint8)
-
-    track(c_space, lower, upper)
     
 if __name__ == "__main__":
     main()

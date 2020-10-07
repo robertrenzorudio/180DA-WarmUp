@@ -23,8 +23,11 @@ def dominant_color(cap: cv2.VideoCapture, pt1: tuple, pt2: tuple):
     out = cv2.VideoWriter('output.mp4', fourcc, 20.0, size)
 
     while(True):
-        _, frame = cap.read()
+        ret, frame = cap.read()
        
+        if not ret:
+            break
+
         # Get region of interest from frame. 
         roi = frame[y1:y2, x1:x2]
         roi = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
